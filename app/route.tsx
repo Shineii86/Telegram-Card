@@ -1,6 +1,9 @@
 /**
- * Telegram Card - Dynamic OG Image Generator for Telegram Profiles
- * https://github.com/Malith-Rukshan/telegram-card
+ * Telegram Card
+ * A lightweight and efficient web scraping utility designed to generate
+ * clean, dynamic preview cards for Telegram profiles, channels, groups, and bots.
+ *
+ * Repository: https://github.com/Shineii86/Telegram-Card
  *
  * Generates beautiful, theme-aware preview cards for Telegram channels,
  * groups, and personal profiles. Perfect for embedding in GitHub READMEs,
@@ -8,10 +11,17 @@
  *
  * Usage: /?username=YourTelegramUsername&theme=light|dark
  *
- * Copyright (c) 2025 Malith Rukshan
- * Licensed under the MIT License
+ * This project is built to help developers seamlessly showcase Telegram
+ * communities and bots with visually structured metadata, making it ideal
+ * for integration into GitHub profiles, portfolio websites, and personal projects.
  *
- * Demo: https://telegram-card.vercel.app/?username=SingleDevelopers
+ * Author:Shinei Nouzen
+ *
+ * Copyright (c) 2026 Shinei Nouzen
+ *
+ * Released under the MIT License.
+ * You are free to use, modify, and distribute this software in accordance
+ * with the terms of the license.
  */
 
 'use server';
