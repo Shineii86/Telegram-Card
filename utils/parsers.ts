@@ -9,6 +9,8 @@
  * communities and bots with visually structured metadata, making it ideal
  * for integration into GitHub profiles, portfolio websites, and personal projects.
  *
+ * This module contains the parsing logic for different types of Telegram entities.
+ *
  * Author:Shinei Nouzen
  *
  * Copyright (c) 2026 Shinei Nouzen
