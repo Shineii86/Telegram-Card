@@ -410,12 +410,27 @@ If you discover a security vulnerability, please **DO NOT** open a public issue.
 
 ---
 
-<p align="center">
-  <strong>Built with ❤️ by <a href="https://github.com/QuinxNetwork">Quinx Network</a></strong>
-</p>
+## 💕 Loved My Work?
 
-<p align="center">
-  <a href="https://github.com/Shineii86/Telegram-Card/stargazers">⭐ Star this repo</a> •
-  <a href="https://github.com/Shineii86/Telegram-Card/fork">🍴 Fork it</a> •
-  <a href="https://twitter.com/intent/tweet?text=Check%20out%20this%20awesome%20Telegram%20Card%20Widget!&url=https://github.com/Shineii86/Telegram-Card">🐦 Share on Twitter</a>
-</p>
+🚨 [Follow me on GitHub](https://github.com/Shineii86)
+
+⭐ [Give a star to this project](https://github.com/Shineii86/Telegram-Card/)
+
+<div align="center">
+
+<a href="https://github.com/Shineii86/Telegram-Card">
+<img src="https://github.com/Shineii86/AniPay/blob/main/Source/Banner6.png" alt="Banner">
+</a>
+  
+  *For inquiries or collaborations*
+     
+[![Telegram Badge](https://img.shields.io/badge/-Telegram-2CA5E0?style=flat&logo=Telegram&logoColor=white)](https://telegram.me/Shineii86 "Contact on Telegram")
+[![Instagram Badge](https://img.shields.io/badge/-Instagram-C13584?style=flat&logo=Instagram&logoColor=white)](https://instagram.com/ikx7.a "Follow on Instagram")
+[![Pinterest Badge](https://img.shields.io/badge/-Pinterest-E60023?style=flat&logo=Pinterest&logoColor=white)](https://pinterest.com/ikx7a "Follow on Pinterest")
+[![Gmail Badge](https://img.shields.io/badge/-Gmail-D14836?style=flat&logo=Gmail&logoColor=white)](mailto:ikx7a@hotmail.com "Send an Email")
+
+  <sup><b>Copyright © 2026 <a href="https://telegram.me/Shineii86">Shinei Nouzen</a> All Rights Reserved</b></sup>
+
+![Last Commit](https://img.shields.io/github/last-commit/Shineii86/Telegram-Card?style=for-the-badge)
+
+</div>
