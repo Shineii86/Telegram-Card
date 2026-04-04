@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
+
    <!-- Primary Meta Tags -->
    <title>Telegram Card Generator - Beautiful Dynamic Cards for Telegram Profiles, Channels & Groups</title>
    <meta name="title" content="Telegram Card Generator - Beautiful Dynamic Cards for Telegram Profiles, Channels & Groups">
@@ -12,7 +12,7 @@
    <meta name="author" content="Shinei Nouzen">
    <meta name="robots" content="index, follow">
    <link rel="canonical" href="https://telegramcard.vercel.app/">
-   
+
    <!-- Open Graph / Facebook -->
    <meta property="og:type" content="website">
    <meta property="og:url" content="https://telegramcard.vercel.app/">
@@ -23,7 +23,7 @@
    <meta property="og:image:height" content="250">
    <meta property="og:site_name" content="Telegram Card Generator">
    <meta property="og:locale" content="en_US">
-   
+
    <!-- Twitter -->
    <meta property="twitter:card" content="summary_large_image">
    <meta property="twitter:url" content="https://telegramcard.vercel.app/">
@@ -31,16 +31,16 @@
    <meta property="twitter:description" content="Generate stunning, customizable cards for Telegram profiles, channels, groups, and bots. Perfect for GitHub READMEs.">
    <meta property="twitter:image" content="https://telegramcard.vercel.app/og.png">
    <meta property="twitter:creator" content="@Shineii86">
-   
+
    <!-- Additional SEO -->
-   <meta name="theme-color" content="#24A1DE">
+   <meta name="theme-color" content="#FFB6C1">
    <meta name="application-name" content="Telegram Card Generator">
    <meta name="apple-mobile-web-app-title" content="Telegram Card">
    <meta name="apple-mobile-web-app-capable" content="yes">
-   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-   
+   <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
    <link rel="icon" href="/favicon.ico" type="image/x-icon">
-   
+
    <!-- JSON-LD Structured Data -->
    <script type="application/ld+json">
    {
@@ -82,21 +82,29 @@
    <!-- Font & Icons -->
    <link rel="preconnect" href="https://fonts.googleapis.com">
    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@300;400;500;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
    <style>
        :root {
-           --primary: #24A1DE;
-           --primary-hover: #1a8bc4;
-           --bg-dark: #0f172a;
-           --bg-card: #1e293b;
-           --text-primary: #f8fafc;
-           --text-secondary: #94a3b8;
-           --accent: #38bdf8;
-           --success: #22c55e;
-           --border: rgba(255, 255, 255, 0.1);
-           --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+           --primary: #FF8FA3;
+           --primary-hover: #FF7A91;
+           --primary-light: #FFE4E9;
+           --secondary: #87CEEB;
+           --secondary-light: #E0F4FF;
+           --accent: #FFD93D;
+           --accent-light: #FFF9E6;
+           --bg-cream: #FFFBF5;
+           --bg-soft: #FFF5F7;
+           --text-primary: #4A4A4A;
+           --text-secondary: #7A7A7A;
+           --text-light: #9A9A9A;
+           --white: #FFFFFF;
+           --shadow-soft: 0 8px 32px rgba(255, 143, 163, 0.15);
+           --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+           --border-soft: rgba(255, 143, 163, 0.2);
+           --gradient-hero: linear-gradient(135deg, #FFE4E9 0%, #E0F4FF 50%, #FFF9E6 100%);
+           --gradient-card: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,245,247,0.9) 100%);
        }
 
        * { 
@@ -104,17 +112,17 @@
            padding: 0; 
            box-sizing: border-box; 
        }
-       
+
        body {
-           font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+           font-family: 'Nunito', 'M PLUS Rounded 1c', -apple-system, BlinkMacSystemFont, sans-serif;
            line-height: 1.6;
            color: var(--text-primary);
-           background: var(--bg-dark);
+           background: var(--bg-cream);
            min-height: 100vh;
            overflow-x: hidden;
        }
 
-       /* Animated Background */
+       /* Soft Pastel Background Animation */
        .bg-animation {
            position: fixed;
            top: 0;
@@ -123,6 +131,7 @@
            height: 100%;
            z-index: -1;
            overflow: hidden;
+           background: var(--bg-cream);
        }
 
        .bg-animation::before {
@@ -132,23 +141,72 @@
            left: -50%;
            width: 200%;
            height: 200%;
-           background: radial-gradient(circle at 50% 50%, rgba(36, 161, 222, 0.15) 0%, transparent 50%),
-                       radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
-           animation: rotate 30s linear infinite;
+           background: 
+               radial-gradient(circle at 30% 20%, rgba(255, 143, 163, 0.08) 0%, transparent 40%),
+               radial-gradient(circle at 70% 80%, rgba(135, 206, 235, 0.08) 0%, transparent 40%),
+               radial-gradient(circle at 50% 50%, rgba(255, 217, 61, 0.05) 0%, transparent 50%);
+           animation: float-bg 20s ease-in-out infinite;
        }
 
-       @keyframes rotate {
-           0% { transform: rotate(0deg); }
-           100% { transform: rotate(360deg); }
+       .bg-blobs {
+           position: absolute;
+           width: 100%;
+           height: 100%;
+           overflow: hidden;
        }
-       
+
+       .blob {
+           position: absolute;
+           border-radius: 50%;
+           filter: blur(60px);
+           opacity: 0.4;
+       }
+
+       .blob-1 {
+           width: 400px;
+           height: 400px;
+           background: var(--primary-light);
+           top: 10%;
+           left: -100px;
+           animation: blob-float 15s ease-in-out infinite;
+       }
+
+       .blob-2 {
+           width: 300px;
+           height: 300px;
+           background: var(--secondary-light);
+           top: 60%;
+           right: -50px;
+           animation: blob-float 18s ease-in-out infinite reverse;
+       }
+
+       .blob-3 {
+           width: 250px;
+           height: 250px;
+           background: var(--accent-light);
+           bottom: 10%;
+           left: 20%;
+           animation: blob-float 20s ease-in-out infinite;
+       }
+
+       @keyframes blob-float {
+           0%, 100% { transform: translate(0, 0) scale(1); }
+           33% { transform: translate(30px, -30px) scale(1.1); }
+           66% { transform: translate(-20px, 20px) scale(0.9); }
+       }
+
+       @keyframes float-bg {
+           0%, 100% { transform: rotate(0deg); }
+           50% { transform: rotate(180deg); }
+       }
+
        .container {
            max-width: 1200px;
            margin: 0 auto;
            padding: 2rem;
            min-height: 100vh;
        }
-       
+
        .hero {
            text-align: center;
            padding: 5rem 2rem;
@@ -156,70 +214,80 @@
            overflow: hidden;
        }
 
-       .hero::before {
-           content: '';
+       .hero-badge-float {
            position: absolute;
-           top: 50%;
-           left: 50%;
-           transform: translate(-50%, -50%);
-           width: 600px;
-           height: 600px;
-           background: radial-gradient(circle, rgba(36, 161, 222, 0.2) 0%, transparent 70%);
-           z-index: -1;
-           animation: pulse 4s ease-in-out infinite;
+           padding: 0.5rem 1rem;
+           background: rgba(255, 255, 255, 0.9);
+           border-radius: 20px;
+           font-size: 0.875rem;
+           color: var(--text-secondary);
+           box-shadow: var(--shadow-soft);
+           animation: float-element 6s ease-in-out infinite;
        }
 
-       @keyframes pulse {
-           0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-           50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+       .hero-badge-float:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+       .hero-badge-float:nth-child(2) { top: 30%; right: 10%; animation-delay: 2s; }
+       .hero-badge-float:nth-child(3) { bottom: 30%; left: 15%; animation-delay: 4s; }
+
+       @keyframes float-element {
+           0%, 100% { transform: translateY(0px) rotate(0deg); }
+           50% { transform: translateY(-10px) rotate(2deg); }
        }
-       
+
        .logo {
-           width: 120px;
-           height: 120px;
+           width: 100px;
+           height: 100px;
            margin: 0 auto 2rem;
            display: flex;
            align-items: center;
            justify-content: center;
-           background: linear-gradient(135deg, rgba(36, 161, 222, 0.2), rgba(56, 189, 248, 0.1));
-           border-radius: 32px;
-           border: 1px solid rgba(255, 255, 255, 0.1);
-           backdrop-filter: blur(10px);
-           box-shadow: 0 8px 32px rgba(36, 161, 222, 0.3);
-           animation: float 6s ease-in-out infinite;
+           background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+           border-radius: 50%;
+           border: 3px solid var(--white);
+           box-shadow: var(--shadow-soft), 0 0 0 10px rgba(255, 143, 163, 0.1);
+           animation: gentle-bounce 3s ease-in-out infinite;
        }
 
-       @keyframes float {
+       @keyframes gentle-bounce {
            0%, 100% { transform: translateY(0px); }
-           50% { transform: translateY(-10px); }
+           50% { transform: translateY(-8px); }
        }
 
-       .logo img {
-           width: 60px;
-           height: 60px;
-           filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+       .logo svg {
+           width: 50px;
+           height: 50px;
+           filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
        }
-       
+
+       .logo svg path {
+           fill: var(--primary);
+       }
+
        h1 {
-           font-size: 3.5rem;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
+           font-size: 3rem;
            font-weight: 800;
            margin-bottom: 1rem;
-           background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #24A1DE 100%);
+           color: var(--text-primary);
+           letter-spacing: -0.02em;
+           line-height: 1.2;
+       }
+
+       .highlight {
+           background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
            -webkit-background-clip: text;
            -webkit-text-fill-color: transparent;
            background-clip: text;
-           letter-spacing: -0.02em;
-           line-height: 1.1;
        }
-       
+
        .subtitle {
-           font-size: 1.25rem;
+           font-size: 1.2rem;
            color: var(--text-secondary);
-           margin-bottom: 3rem;
+           margin-bottom: 2rem;
            max-width: 600px;
            margin-left: auto;
            margin-right: auto;
-           font-weight: 400;
+           font-weight: 500;
        }
 
        .hero-badges {
@@ -234,28 +302,36 @@
            display: inline-flex;
            align-items: center;
            gap: 0.5rem;
-           padding: 0.5rem 1rem;
-           background: rgba(255, 255, 255, 0.05);
-           border: 1px solid var(--border);
-           border-radius: 100px;
-           font-size: 0.875rem;
-           color: var(--text-secondary);
-           backdrop-filter: blur(10px);
+           padding: 0.6rem 1.2rem;
+           background: var(--white);
+           border: 2px solid var(--primary-light);
+           border-radius: 50px;
+           font-size: 0.9rem;
+           color: var(--text-primary);
+           font-weight: 600;
+           transition: all 0.3s ease;
+           box-shadow: 0 4px 12px rgba(0,0,0,0.05);
        }
 
        .hero-badge i {
            color: var(--primary);
        }
-       
+
+       .hero-badge:hover {
+           transform: translateY(-2px);
+           box-shadow: var(--shadow-soft);
+           border-color: var(--primary);
+       }
+
        .generator {
            max-width: 800px;
            margin: 0 auto 4rem;
-           background: var(--bg-card);
+           background: var(--gradient-card);
            padding: 2.5rem;
-           border-radius: 24px;
-           border: 1px solid var(--border);
-           box-shadow: var(--shadow);
-           backdrop-filter: blur(20px);
+           border-radius: 32px;
+           border: 2px solid var(--border-soft);
+           box-shadow: var(--shadow-card);
+           backdrop-filter: blur(10px);
            position: relative;
            overflow: hidden;
        }
@@ -266,91 +342,109 @@
            top: 0;
            left: 0;
            right: 0;
-           height: 1px;
-           background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+           height: 4px;
+           background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
        }
-       
+
+       .section-title {
+           margin-bottom: 1.5rem;
+           text-align: center;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
+           font-size: 1.5rem;
+           font-weight: 700;
+           color: var(--text-primary);
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           gap: 0.75rem;
+       }
+
+       .section-title i {
+           color: var(--primary);
+       }
+
        .form-group {
            margin-bottom: 1.5rem;
        }
-       
+
        .form-group label {
            display: block;
            margin-bottom: 0.75rem;
-           font-weight: 600;
+           font-weight: 700;
            color: var(--text-primary);
            font-size: 0.95rem;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
-       
+
        .form-group input, .form-group select {
            width: 100%;
            padding: 1rem 1.25rem;
-           background: rgba(15, 23, 42, 0.6);
-           border: 1px solid var(--border);
-           border-radius: 12px;
+           background: var(--white);
+           border: 2px solid var(--primary-light);
+           border-radius: 16px;
            font-size: 1rem;
            outline: none;
            transition: all 0.3s ease;
-           font-family: 'Plus Jakarta Sans', sans-serif;
+           font-family: 'Nunito', sans-serif;
            color: var(--text-primary);
        }
 
        .form-group input::placeholder {
-           color: var(--text-secondary);
+           color: var(--text-light);
        }
-       
+
        .form-group input:focus, .form-group select:focus {
            border-color: var(--primary);
-           box-shadow: 0 0 0 3px rgba(36, 161, 222, 0.1);
-           background: rgba(15, 23, 42, 0.8);
+           box-shadow: 0 0 0 4px rgba(255, 143, 163, 0.15);
+           transform: translateY(-2px);
        }
-       
+
        .color-input-group {
            display: flex;
            gap: 0.75rem;
            align-items: center;
        }
-       
+
        .color-picker {
            width: 52px !important;
            height: 52px !important;
            padding: 4px !important;
-           border: 1px solid var(--border) !important;
+           border: 2px solid var(--primary-light) !important;
            border-radius: 12px !important;
            cursor: pointer;
-           background: rgba(15, 23, 42, 0.6) !important;
+           background: var(--white) !important;
            overflow: hidden;
        }
-       
+
        .color-picker::-webkit-color-swatch-wrapper {
            padding: 0;
        }
-       
+
        .color-picker::-webkit-color-swatch {
            border: none;
            border-radius: 8px;
-           border: 1px solid rgba(255,255,255,0.1);
+           border: 1px solid rgba(0,0,0,0.1);
        }
-       
+
        .color-text-input {
            flex: 1;
        }
-       
+
        .form-row {
            display: grid;
            grid-template-columns: 1fr 1fr;
            gap: 1.25rem;
        }
-       
+
        .form-row-3 {
            display: grid;
            grid-template-columns: 1fr 1fr 1fr;
            gap: 1.25rem;
        }
-       
+
        .advanced-toggle {
-           background: rgba(255, 255, 255, 0.05);
-           border: 1px solid var(--border);
+           background: var(--white);
+           border: 2px dashed var(--primary-light);
            color: var(--text-secondary);
            cursor: pointer;
            font-size: 0.95rem;
@@ -358,20 +452,22 @@
            display: inline-flex;
            align-items: center;
            gap: 0.75rem;
-           padding: 0.75rem 1.25rem;
-           border-radius: 12px;
-           font-weight: 500;
+           padding: 0.875rem 1.5rem;
+           border-radius: 50px;
+           font-weight: 700;
            transition: all 0.3s ease;
            width: 100%;
            justify-content: center;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
 
        .advanced-toggle:hover {
-           background: rgba(255, 255, 255, 0.1);
-           color: var(--text-primary);
-           border-color: rgba(255, 255, 255, 0.2);
+           background: var(--primary-light);
+           color: var(--primary);
+           border-style: solid;
+           border-color: var(--primary);
        }
-       
+
        .advanced-toggle i {
            font-size: 1rem;
            transition: transform 0.3s ease;
@@ -380,10 +476,10 @@
        .advanced-toggle.active i {
            transform: rotate(180deg);
        }
-       
+
        .advanced-options {
            display: none;
-           border-top: 1px solid var(--border);
+           border-top: 2px solid var(--primary-light);
            padding-top: 1.5rem;
            margin-top: 1.5rem;
            animation: slideDown 0.3s ease;
@@ -393,52 +489,54 @@
            from { opacity: 0; transform: translateY(-10px); }
            to { opacity: 1; transform: translateY(0); }
        }
-       
+
        .advanced-options.show {
            display: block;
        }
-       
+
        .theme-presets {
            display: flex;
            gap: 0.75rem;
            margin-bottom: 1.5rem;
            flex-wrap: wrap;
        }
-       
+
        .theme-preset {
            padding: 0.625rem 1.25rem;
-           border: 1px solid var(--border);
-           border-radius: 100px;
-           background: rgba(15, 23, 42, 0.4);
+           border: 2px solid var(--primary-light);
+           border-radius: 50px;
+           background: var(--white);
            cursor: pointer;
            font-size: 0.9rem;
            transition: all 0.3s ease;
-           font-weight: 500;
+           font-weight: 700;
            color: var(--text-secondary);
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
-       
+
        .theme-preset:hover {
            border-color: var(--primary);
-           color: var(--text-primary);
+           color: var(--primary);
            transform: translateY(-2px);
+           box-shadow: 0 4px 12px rgba(255, 143, 163, 0.2);
        }
-       
+
        .theme-preset.active {
            border-color: var(--primary);
            background: var(--primary);
            color: white;
-           box-shadow: 0 4px 12px rgba(36, 161, 222, 0.4);
+           box-shadow: 0 4px 12px rgba(255, 143, 163, 0.4);
        }
-       
+
        .generate-btn {
            width: 100%;
            padding: 1.25rem 2rem;
-           background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+           background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
            color: white;
            border: none;
-           border-radius: 16px;
+           border-radius: 20px;
            font-size: 1.1rem;
-           font-weight: 700;
+           font-weight: 800;
            cursor: pointer;
            transition: all 0.3s ease;
            margin-bottom: 1rem;
@@ -448,7 +546,8 @@
            gap: 0.75rem;
            position: relative;
            overflow: hidden;
-           box-shadow: 0 4px 20px rgba(36, 161, 222, 0.4);
+           box-shadow: 0 4px 20px rgba(255, 143, 163, 0.4);
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
 
        .generate-btn::before {
@@ -458,37 +557,37 @@
            left: -100%;
            width: 100%;
            height: 100%;
-           background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+           background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
            transition: 0.5s;
        }
 
        .generate-btn:hover::before {
            left: 100%;
        }
-       
+
        .generate-btn i {
            font-size: 1.3rem;
        }
-       
+
        .generate-btn:hover {
-           transform: translateY(-2px);
-           box-shadow: 0 8px 30px rgba(36, 161, 222, 0.6);
+           transform: translateY(-3px);
+           box-shadow: 0 8px 30px rgba(255, 143, 163, 0.6);
        }
-       
+
        .generate-btn:disabled {
-           background: #334155;
+           background: #ddd;
            cursor: not-allowed;
            transform: none;
            box-shadow: none;
        }
-       
+
        .preview-section {
            display: none;
            margin-top: 2.5rem;
            padding: 2rem;
-           background: rgba(15, 23, 42, 0.6);
-           border: 1px solid var(--border);
-           border-radius: 16px;
+           background: var(--white);
+           border: 2px solid var(--primary-light);
+           border-radius: 24px;
            text-align: center;
            animation: fadeIn 0.5s ease;
        }
@@ -497,7 +596,7 @@
            from { opacity: 0; transform: scale(0.95); }
            to { opacity: 1; transform: scale(1); }
        }
-       
+
        .preview-section.show {
            display: block;
        }
@@ -506,30 +605,31 @@
            margin-bottom: 1.5rem;
            color: var(--text-primary);
            font-size: 1.25rem;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
-       
+
        .preview-image {
            max-width: 100%;
            height: auto;
-           border-radius: 12px;
+           border-radius: 16px;
            margin-bottom: 1.5rem;
-           border: 1px solid var(--border);
-           box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+           border: 3px solid var(--primary-light);
+           box-shadow: 0 10px 40px rgba(0,0,0,0.1);
        }
-       
+
        .url-copy {
            display: flex;
            gap: 0.75rem;
            margin-top: 1rem;
        }
-       
+
        .url-input {
            flex: 1;
            padding: 1rem 1.25rem;
-           border: 1px solid var(--border);
-           border-radius: 12px;
+           border: 2px solid var(--primary-light);
+           border-radius: 16px;
            font-size: 0.9rem;
-           background: rgba(15, 23, 42, 0.8);
+           background: var(--bg-soft);
            font-family: 'Monaco', 'Consolas', monospace;
            color: var(--text-primary);
            outline: none;
@@ -538,49 +638,50 @@
        .url-input:focus {
            border-color: var(--primary);
        }
-       
+
        .copy-btn {
            padding: 1rem 1.75rem;
-           background: var(--success);
+           background: linear-gradient(135deg, #4ADE80 0%, #22C55E 100%);
            color: white;
            border: none;
-           border-radius: 12px;
+           border-radius: 16px;
            cursor: pointer;
            font-size: 0.95rem;
-           font-weight: 600;
+           font-weight: 700;
            transition: all 0.3s ease;
            display: inline-flex;
            align-items: center;
            gap: 0.5rem;
            white-space: nowrap;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
+           box-shadow: 0 4px 12px rgba(74, 222, 128, 0.3);
        }
-       
+
        .copy-btn i {
            font-size: 1.1rem;
        }
-       
+
        .copy-btn:hover {
-           background: #16a34a;
-           transform: translateY(-1px);
-           box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+           transform: translateY(-2px);
+           box-shadow: 0 6px 20px rgba(74, 222, 128, 0.4);
        }
-       
+
        .copy-btn.copied {
-           background: #059669;
+           background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
        }
-       
+
        .features {
            display: grid;
            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
            gap: 1.5rem;
            margin-bottom: 4rem;
        }
-       
+
        .feature {
-           background: var(--bg-card);
+           background: var(--white);
            padding: 2rem;
-           border-radius: 20px;
-           border: 1px solid var(--border);
+           border-radius: 24px;
+           border: 2px solid var(--primary-light);
            transition: all 0.3s ease;
            position: relative;
            overflow: hidden;
@@ -592,8 +693,8 @@
            top: 0;
            left: 0;
            width: 100%;
-           height: 3px;
-           background: linear-gradient(90deg, var(--primary), var(--accent));
+           height: 4px;
+           background: linear-gradient(90deg, var(--primary), var(--secondary));
            transform: scaleX(0);
            transition: transform 0.3s ease;
        }
@@ -604,46 +705,48 @@
 
        .feature:hover {
            transform: translateY(-5px);
-           border-color: rgba(56, 189, 248, 0.3);
-           box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+           border-color: var(--primary);
+           box-shadow: var(--shadow-soft);
        }
-       
+
        .feature-icon {
-           width: 56px;
-           height: 56px;
-           background: linear-gradient(135deg, rgba(36, 161, 222, 0.2), rgba(56, 189, 248, 0.1));
-           border-radius: 16px;
+           width: 60px;
+           height: 60px;
+           background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+           border-radius: 20px;
            display: flex;
            align-items: center;
            justify-content: center;
            margin-bottom: 1.25rem;
-           color: var(--accent);
+           color: var(--primary);
            font-size: 1.75rem;
-           border: 1px solid rgba(56, 189, 248, 0.2);
+           border: 2px solid var(--white);
+           box-shadow: 0 4px 12px rgba(255, 143, 163, 0.2);
        }
-       
+
        .feature h3 {
            font-size: 1.25rem;
            margin-bottom: 0.75rem;
            color: var(--text-primary);
-           font-weight: 700;
+           font-weight: 800;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
-       
+
        .feature p {
            color: var(--text-secondary);
            line-height: 1.6;
            font-size: 0.95rem;
        }
-       
+
        .examples {
-           background: var(--bg-card);
+           background: var(--white);
            padding: 2.5rem;
-           border-radius: 24px;
-           border: 1px solid var(--border);
+           border-radius: 32px;
+           border: 2px solid var(--primary-light);
            margin-bottom: 4rem;
-           box-shadow: var(--shadow);
+           box-shadow: var(--shadow-card);
        }
-       
+
        .examples h2 {
            margin-bottom: 2rem;
            color: var(--text-primary);
@@ -651,63 +754,67 @@
            align-items: center;
            gap: 0.75rem;
            font-size: 1.75rem;
-           font-weight: 700;
+           font-weight: 800;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
-       
+
        .examples h2 i {
            color: var(--primary);
            font-size: 1.5rem;
        }
-       
+
        .example-grid {
            display: grid;
            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
            gap: 1.5rem;
        }
-       
+
        .example-item {
            text-align: center;
-           background: rgba(15, 23, 42, 0.6);
+           background: var(--bg-soft);
            padding: 1.5rem;
-           border-radius: 16px;
-           border: 1px solid var(--border);
+           border-radius: 20px;
+           border: 2px solid var(--primary-light);
            transition: all 0.3s ease;
        }
 
        .example-item:hover {
            transform: translateY(-3px);
-           border-color: rgba(56, 189, 248, 0.3);
+           border-color: var(--primary);
+           box-shadow: var(--shadow-soft);
        }
-       
+
        .example-item img {
            width: 100%;
            height: auto;
-           border-radius: 12px;
+           border-radius: 16px;
            margin-bottom: 1rem;
-           border: 1px solid var(--border);
+           border: 2px solid var(--white);
+           box-shadow: 0 4px 12px rgba(0,0,0,0.08);
        }
-       
+
        .example-item h4 {
            font-size: 1.1rem;
            color: var(--text-primary);
            margin-bottom: 0.25rem;
-           font-weight: 600;
+           font-weight: 700;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
-       
+
        .example-item p {
            font-size: 0.9rem;
            color: var(--text-secondary);
        }
-       
+
        .usage {
-           background: var(--bg-card);
+           background: var(--white);
            padding: 2.5rem;
-           border-radius: 24px;
-           border: 1px solid var(--border);
+           border-radius: 32px;
+           border: 2px solid var(--primary-light);
            margin-bottom: 4rem;
-           box-shadow: var(--shadow);
+           box-shadow: var(--shadow-card);
        }
-       
+
        .usage h2 {
            margin-bottom: 2rem;
            color: var(--text-primary);
@@ -715,13 +822,14 @@
            align-items: center;
            gap: 0.75rem;
            font-size: 1.75rem;
-           font-weight: 700;
+           font-weight: 800;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
-       
+
        .usage h2 i {
            color: var(--primary);
        }
-       
+
        .usage h3 {
            margin: 2rem 0 1rem;
            display: flex;
@@ -729,36 +837,37 @@
            gap: 0.75rem;
            color: var(--text-primary);
            font-size: 1.25rem;
-           font-weight: 600;
+           font-weight: 700;
+           font-family: 'M PLUS Rounded 1c', sans-serif;
        }
-       
+
        .usage h3 i {
-           color: var(--accent);
+           color: var(--secondary);
            font-size: 1.2rem;
-           width: 2rem;
-           height: 2rem;
+           width: 2.5rem;
+           height: 2.5rem;
            display: flex;
            align-items: center;
            justify-content: center;
-           background: rgba(56, 189, 248, 0.1);
-           border-radius: 8px;
+           background: var(--secondary-light);
+           border-radius: 12px;
        }
 
        .usage p {
            color: var(--text-secondary);
            margin-bottom: 1rem;
        }
-       
+
        .code-block {
-           background: #0d1117;
-           color: #e6edf3;
+           background: linear-gradient(135deg, #2D3748 0%, #1A202C 100%);
+           color: #E2E8F0;
            padding: 1.25rem;
-           border-radius: 12px;
+           border-radius: 16px;
            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
            font-size: 0.9rem;
            overflow-x: auto;
            margin: 1rem 0;
-           border: 1px solid #30363d;
+           border: 2px solid rgba(255,255,255,0.1);
            position: relative;
        }
 
@@ -768,30 +877,30 @@
            top: 0;
            left: 0;
            right: 0;
-           height: 1px;
-           background: linear-gradient(90deg, var(--primary), transparent);
-           opacity: 0.5;
+           height: 3px;
+           background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+           opacity: 0.8;
        }
-       
+
        .footer {
            text-align: center;
            padding: 3rem 2rem;
            color: var(--text-secondary);
-           border-top: 1px solid var(--border);
+           border-top: 2px solid var(--primary-light);
            margin-top: 2rem;
-           background: rgba(15, 23, 42, 0.5);
-           border-radius: 24px 24px 0 0;
+           background: var(--white);
+           border-radius: 32px 32px 0 0;
        }
-       
+
        .footer a {
-           color: var(--accent);
+           color: var(--primary);
            text-decoration: none;
-           font-weight: 500;
+           font-weight: 700;
            transition: color 0.3s ease;
        }
-       
+
        .footer a:hover {
-           color: var(--primary);
+           color: var(--secondary);
            text-decoration: underline;
        }
 
@@ -808,10 +917,24 @@
            align-items: center;
            gap: 0.5rem;
        }
-       
+
        .usage a i {
            margin-right: 0.5rem;
            color: var(--primary);
+       }
+
+       /* Decorative Elements */
+       .heart-decoration {
+           position: absolute;
+           font-size: 1.5rem;
+           color: var(--primary-light);
+           animation: float-heart 4s ease-in-out infinite;
+           pointer-events: none;
+       }
+
+       @keyframes float-heart {
+           0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
+           50% { transform: translateY(-15px) scale(1.2); opacity: 1; }
        }
 
        /* Scrollbar Styling */
@@ -821,13 +944,13 @@
        }
 
        ::-webkit-scrollbar-track {
-           background: var(--bg-dark);
+           background: var(--bg-cream);
        }
 
        ::-webkit-scrollbar-thumb {
-           background: var(--bg-card);
+           background: var(--primary-light);
            border-radius: 5px;
-           border: 2px solid var(--bg-dark);
+           border: 2px solid var(--bg-cream);
        }
 
        ::-webkit-scrollbar-thumb:hover {
@@ -836,16 +959,16 @@
 
        /* Selection */
        ::selection {
-           background: rgba(36, 161, 222, 0.3);
-           color: white;
+           background: rgba(255, 143, 163, 0.3);
+           color: var(--text-primary);
        }
-       
+
        @media (max-width: 768px) {
            .container { 
                padding: 1rem; 
            }
            h1 { 
-               font-size: 2.5rem; 
+               font-size: 2rem; 
            }
            .hero {
                padding: 3rem 1rem;
@@ -861,6 +984,7 @@
            }
            .generator, .examples, .usage {
                padding: 1.5rem;
+               border-radius: 24px;
            }
            .url-copy {
                flex-direction: column;
@@ -869,11 +993,14 @@
                width: 100%;
                justify-content: center;
            }
+           .hero-badge-float {
+               display: none;
+           }
        }
 
        @media (max-width: 480px) {
            h1 {
-               font-size: 2rem;
+               font-size: 1.75rem;
            }
            .subtitle {
                font-size: 1rem;
@@ -883,17 +1010,28 @@
            }
        }
    </style>
+<base target="_blank">
 </head>
 <body>
-   <div class="bg-animation"></div>
+   <div class="bg-animation">
+       <div class="bg-blobs">
+           <div class="blob blob-1"></div>
+           <div class="blob blob-2"></div>
+           <div class="blob blob-3"></div>
+       </div>
+   </div>
    <div class="container">
        <div class="hero">
+           <div class="hero-badge-float">✨ Easy to use</div>
+           <div class="hero-badge-float">🎨 Beautiful</div>
+           <div class="hero-badge-float">⚡ Fast</div>
+
            <div class="logo">
                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.22 15.52 15.99C15.37 16.82 15.01 17.07 14.68 17.1C14.19 17.14 13.81 16.76 13.34 16.43C12.61 15.91 12.2 15.61 11.5 15.11C10.68 14.53 11.24 14.2 11.74 13.68C11.88 13.54 14.15 11.5 14.2 11.31C14.21 11.26 14.21 11.11 14.12 11.03C14.03 10.95 13.91 10.98 13.81 11.01C13.67 11.05 11.4 12.67 9.04 14.36C8.68 14.62 8.35 14.75 8.05 14.74C7.72 14.73 7.1 14.54 6.69 14.37C6.19 14.17 5.79 14.06 5.82 13.76C5.84 13.61 6.07 13.45 6.5 13.29C9.12 12.27 10.93 11.53 12.73 10.79C15.42 9.72 16.88 9.17 17.32 9.06C17.96 8.9 18.09 8.89 18.17 8.96C18.24 9.02 18.26 9.12 18.25 9.19C18.24 9.26 18.22 9.46 18.2 9.6C18.15 9.96 17.91 11.33 16.64 8.8Z" fill="white"/>
                </svg>
            </div>
-           <h1>Telegram Card Generator</h1>
+           <h1><span class="highlight">Telegram</span> Card Generator</h1>
            <p class="subtitle">Create stunning, customizable cards for Telegram profiles, channels, groups, and bots. Powered by Next.js OG Image API for lightning-fast generation.</p>
            <div class="hero-badges">
                <span class="hero-badge"><i class="fas fa-bolt"></i> Lightning Fast</span>
@@ -903,10 +1041,10 @@
        </div>
 
        <div class="generator">
-           <h2 style="margin-bottom: 1.5rem; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.75rem; font-size: 1.5rem; font-weight: 700;">
-               <i class="fas fa-wand-magic-sparkles" style="color: var(--primary);"></i> Generate Your Card
+           <h2 class="section-title">
+               <i class="fas fa-wand-magic-sparkles"></i> Generate Your Card
            </h2>
-           
+
            <div class="form-group">
                <label for="username">Telegram Username *</label>
                <input type="text" id="username" placeholder="e.g., MaximXStickers" required>
@@ -915,12 +1053,12 @@
            <div class="form-group">
                <label>Theme Presets</label>
                <div class="theme-presets">
-                   <button class="theme-preset active" data-preset="light">Light</button>
-                   <button class="theme-preset" data-preset="dark">Dark</button>
-                   <button class="theme-preset" data-preset="ocean">Ocean</button>
-                   <button class="theme-preset" data-preset="sunset">Sunset</button>
-                   <button class="theme-preset" data-preset="forest">Forest</button>
-                   <button class="theme-preset" data-preset="custom">Custom</button>
+                   <button class="theme-preset active" data-preset="light">☀️ Light</button>
+                   <button class="theme-preset" data-preset="dark">🌙 Dark</button>
+                   <button class="theme-preset" data-preset="ocean">🌊 Ocean</button>
+                   <button class="theme-preset" data-preset="sunset">🌅 Sunset</button>
+                   <button class="theme-preset" data-preset="forest">🌲 Forest</button>
+                   <button class="theme-preset" data-preset="custom">🎨 Custom</button>
                </div>
            </div>
 
@@ -1020,22 +1158,22 @@
                    <p>@MaximXStickers</p>
                </div>
                <div class="example-item">
-                   <img src="/?username=QuinxNetwork&theme=dark&random" alt="Premium Dark Theme">
+                   <img src="/?username=QuinxNetwork&theme=dark&random" alt="QuinxNetwork Dark Theme">
                    <h4>Channel - Dark Theme</h4>
                    <p>@QuinxNetwork</p>
                </div>
                <div class="example-item">
-                   <img src="/?username=Shineii86&theme=light&random" alt="Pavel Durov">
+                   <img src="/?username=Shineii86&theme=light&random" alt="Shinei Nouzen">
                    <h4>Personal Profile</h4>
                    <p>@Shineii86</p>
                </div>
                <div class="example-item">
-                   <img src="/?username=MikoReactionsBot&theme=light&random" alt="SMS Bot">
+                   <img src="/?username=AlisaReactionsBot&theme=light&random" alt="Reaction Bot">
                    <h4>Bot</h4>
-                   <p>@MikoReactionsBot</p>
+                   <p>@AlisaReactionsBot</p>
                </div>
                <div class="example-item">
-                   <img src="/?username=MaximXSticker&theme=light&random" alt="SSH Store Group">
+                   <img src="/?username=MaximXSticker&theme=light&random" alt="Sticker Chat Group">
                    <h4>Group</h4>
                    <p>@MaximXSticker</p>
                </div>
@@ -1082,51 +1220,51 @@
 
        <div class="usage">
            <h2><i class="fas fa-book"></i> Usage Guide & API Documentation</h2>
-           
+
            <h3><i class="fas fa-terminal"></i> Basic Usage</h3>
            <p>Simply add a Telegram username to generate a card:</p>
            <div class="code-block">https://telegramcard.vercel.app/?username=MaximXStickers</div>
-           
+
            <h3><i class="fas fa-moon"></i> With Theme</h3>
            <p>Choose between light and dark themes:</p>
            <div class="code-block">https://telegramcard.vercel.app/?username=MaximXStickers&theme=dark</div>
-           
+
            <h3><i class="fab fa-github"></i> GitHub README Integration</h3>
            <p>Perfect for showcasing your Telegram presence in README files:</p>
            <div class="code-block">&lt;img src="https://telegramcard.vercel.app/?username=MaximXStickers" alt="@MaximXStickers" style="width: 300px;" /&gt;</div>
            <p>Or using Markdown:</p>
            <div class="code-block">![MaximXStickers](https://telegramcard.vercel.app/?username=MaximXStickers)</div>
-           
+
            <h3><i class="fas fa-sliders"></i> Advanced Customization</h3>
            <p>Customize colors, fonts, and shadows to match your brand:</p>
-           <div class="code-block">https://telegramcard.vercel.app/?username=SL_Developers&bgColor=rgba(30,41,59,1)&textColor=%23F1F5F9&subtleTextColor=%23CBD5E1&extraColor=%23F59E0B&shadowColor=rgba(0,0,0,0.2)&fontFamily=system-ui</div>
-           
+           <div class="code-block">https://telegramcard.vercel.app/?username=MaximXStickers&bgColor=rgba(30,41,59,1)&textColor=%23F1F5F9&subtleTextColor=%23CBD5E1&extraColor=%23F59E0B&shadowColor=rgba(0,0,0,0.2)&fontFamily=system-ui</div>
+
            <h3><i class="fas fa-list"></i> Available Parameters</h3>
            <p>Customize your cards with these URL parameters:</p>
            <ul style="margin: 1rem 0; padding-left: 2rem; color: var(--text-secondary);">
-               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent);">username</strong> - Telegram username (required)</li>
-               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent);">theme</strong> - light or dark</li>
-               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent);">bgColor</strong> - Background color (rgba or hex)</li>
-               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent);">textColor</strong> - Main text color</li>
-               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent);">subtleTextColor</strong> - Secondary text color</li>
-               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent);">extraColor</strong> - Accent color for counts</li>
-               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent);">shadowColor</strong> - Box shadow color</li>
-               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--accent);">fontFamily</strong> - Font family name</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">username</strong> - Telegram username (required)</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">theme</strong> - light or dark</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">bgColor</strong> - Background color (rgba or hex)</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">textColor</strong> - Main text color</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">subtleTextColor</strong> - Secondary text color</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">extraColor</strong> - Accent color for counts</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">shadowColor</strong> - Box shadow color</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">fontFamily</strong> - Font family name</li>
            </ul>
-           
+
            <h3><i class="fas fa-lightbulb"></i> Use Cases</h3>
            <ul style="margin: 1rem 0; padding-left: 2rem; color: var(--text-secondary);">
-               <li style="margin-bottom: 0.5rem;">GitHub profile README showcases</li>
-               <li style="margin-bottom: 0.5rem;">Personal website integration</li>
-               <li style="margin-bottom: 0.5rem;">Social media profile links</li>
-               <li style="margin-bottom: 0.5rem;">Developer portfolio displays</li>
-               <li style="margin-bottom: 0.5rem;">Channel/group promotion materials</li>
-               <li style="margin-bottom: 0.5rem;">Bot documentation pages</li>
+               <li style="margin-bottom: 0.5rem;">GitHub Profile README Showcases</li>
+               <li style="margin-bottom: 0.5rem;">Personal Website Integration</li>
+               <li style="margin-bottom: 0.5rem;">Social Media Profile Links</li>
+               <li style="margin-bottom: 0.5rem;">Developer Portfolio Displays</li>
+               <li style="margin-bottom: 0.5rem;">Channel/Group Promotion Materials</li>
+               <li style="margin-bottom: 0.5rem;">Bot Documentation Pages</li>
            </ul>
-           
+
            <p style="margin-top: 2rem;">
-               <a href="https://github.com/Shineii86/Telegram-Card" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.25rem; background: rgba(56, 189, 248, 0.1); border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.2); transition: all 0.3s ease;">
-                   <i class="fab fa-github"></i> View complete documentation and source code on GitHub →
+               <a href="https://github.com/Shineii86/Telegram-Card" target="_blank" style="color: var(--primary); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.5rem; background: var(--primary-light); border-radius: 50px; border: 2px solid var(--primary); transition: all 0.3s ease;">
+                   <i class="fab fa-github"></i> View on GitHub →
                </a>
            </p>
        </div>
@@ -1184,7 +1322,7 @@
            btn.addEventListener('click', function() {
                document.querySelectorAll('.theme-preset').forEach(b => b.classList.remove('active'));
                this.classList.add('active');
-               
+
                const preset = this.dataset.preset;
                if (preset !== 'custom' && themePresets[preset]) {
                    applyPreset(themePresets[preset]);
@@ -1208,15 +1346,15 @@
        function applyPreset(preset) {
            // Clear all custom fields first
            clearThemeInputs();
-           
+
            // Apply preset values
            Object.keys(preset).forEach(key => {
                const input = document.getElementById(key);
                const picker = document.getElementById(key + 'Picker');
-               
+
                if (input && preset[key] !== undefined) {
                    input.value = preset[key];
-                   
+
                    // Also update color picker if it's a hex color
                    if (picker && preset[key].match(/^#([0-9A-Fa-f]{3}){1,2}$/)) {
                        picker.value = preset[key];
@@ -1229,11 +1367,11 @@
            ['theme', 'bgColor', 'textColor', 'subtleTextColor', 'extraColor', 'shadowColor', 'fontFamily'].forEach(id => {
                const input = document.getElementById(id);
                const picker = document.getElementById(id + 'Picker');
-               
+
                if (input) {
                    input.value = '';
                }
-               
+
                // Reset color picker to default
                if (picker) {
                    picker.value = '#000000';
@@ -1246,7 +1384,7 @@
            const toggleBtn = document.getElementById('advanced-toggle-btn');
            options.classList.toggle('show');
            toggleBtn.classList.toggle('active');
-           
+
            const toggleIcon = document.getElementById('toggle-icon');
            const toggleText = document.getElementById('toggle-text');
            if (options.classList.contains('show')) {
@@ -1260,7 +1398,7 @@
 
        function generateCard() {
            const username = document.getElementById('username').value.trim();
-           
+
            if (!username) {
                // Create a nice alert instead of default
                const input = document.getElementById('username');
@@ -1270,7 +1408,7 @@
                    input.style.borderColor = '';
                    input.style.animation = '';
                }, 500);
-               
+
                // Add shake animation
                const style = document.createElement('style');
                style.textContent = `
@@ -1290,7 +1428,7 @@
 
            // Get active preset
            const activePreset = document.querySelector('.theme-preset.active').dataset.preset;
-           
+
            // If using a built-in preset, apply its parameters
            if (activePreset !== 'custom' && themePresets[activePreset]) {
                const preset = themePresets[activePreset];
@@ -1303,7 +1441,7 @@
            } else {
                // Use advanced options for custom preset
                const advancedFields = ['theme', 'bgColor', 'textColor', 'subtleTextColor', 'extraColor', 'shadowColor', 'fontFamily'];
-               
+
                advancedFields.forEach(field => {
                    const input = document.getElementById(field);
                    if (input && input.value.trim()) {
@@ -1315,16 +1453,16 @@
            // Generate URL and show preview
            const baseUrl = window.location.origin;
            const cardUrl = `${baseUrl}/?${params.toString()}`;
-           
+
            // Show preview
            const previewSection = document.getElementById('preview-section');
            const previewImage = document.getElementById('preview-image');
            const urlInput = document.getElementById('generated-url');
-           
+
            previewImage.src = cardUrl + '&t=' + Date.now(); // Add timestamp to force reload
            urlInput.value = cardUrl;
            previewSection.classList.add('show');
-           
+
            // Scroll to preview
            previewSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
        }
@@ -1332,11 +1470,11 @@
        function copyUrl() {
            const urlInput = document.getElementById('generated-url');
            const copyBtn = document.querySelector('.copy-btn');
-           
+
            navigator.clipboard.writeText(urlInput.value).then(() => {
                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
                copyBtn.classList.add('copied');
-               
+
                setTimeout(() => {
                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy URL';
                    copyBtn.classList.remove('copied');
@@ -1347,7 +1485,7 @@
                document.execCommand('copy');
                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
                copyBtn.classList.add('copied');
-               
+
                setTimeout(() => {
                    copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy URL';
                    copyBtn.classList.remove('copied');
@@ -1365,18 +1503,18 @@
        // Color picker synchronization
        function initColorPickers() {
            const colorFields = ['bgColor', 'textColor', 'subtleTextColor', 'extraColor', 'shadowColor'];
-           
+
            colorFields.forEach(field => {
                const picker = document.getElementById(field + 'Picker');
                const textInput = document.getElementById(field);
-               
+
                if (picker && textInput) {
                    // Color picker to text input
                    picker.addEventListener('input', function() {
                        textInput.value = this.value;
                        switchToCustomPreset();
                    });
-                   
+
                    // Text input to color picker (only for hex colors)
                    textInput.addEventListener('input', function() {
                        const value = this.value.trim();
@@ -1389,19 +1527,19 @@
                }
            });
        }
-       
+
        function switchToCustomPreset() {
            document.querySelectorAll('.theme-preset').forEach(b => b.classList.remove('active'));
            document.querySelector('[data-preset="custom"]').classList.add('active');
        }
-       
+
        // Auto-switch to custom preset when advanced options are modified
        document.querySelectorAll('#advanced-options input:not(.color-picker), #advanced-options select').forEach(input => {
            input.addEventListener('input', function() {
                switchToCustomPreset();
            });
        });
-       
+
        // Initialize color pickers on page load
        initColorPickers();
    </script>
