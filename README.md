@@ -106,7 +106,7 @@ No preview. No context. No engagement.
 
 **After** ✨
 
-<img src="https://telegramcard.vercel.app/?username=MaximXStickers&theme=dark" width="320"/>
+<img src="https://telegramcard.vercel.app/?username=MaximXStickers&theme=dark" width="480"/>
 
 Rich branded card with  
 live stats and verified badge.
@@ -146,23 +146,23 @@ live stats and verified badge.
   </tr>
   <tr>
     <td><strong>📢 Channel</strong><br/><code>@MaximXStickers</code></td>
-    <td><img src="https://telegramcard.vercel.app/?username=MaximXStickers&theme=light" width="300"/></td>
-    <td><img src="https://telegramcard.vercel.app/?username=MaximXStickers&theme=dark" width="300"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=MaximXStickers&theme=light" width="450"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=MaximXStickers&theme=dark" width="450"/></td>
   </tr>
   <tr>
     <td><strong>🤖 Bot</strong><br/><code>@MikoReactionsBot</code></td>
-    <td><img src="https://telegramcard.vercel.app/?username=MikoReactionsBot&theme=light" width="300"/></td>
-    <td><img src="https://telegramcard.vercel.app/?username=MikoReactionsBot&theme=dark" width="300"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=MikoReactionsBot&theme=light" width="450"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=MikoReactionsBot&theme=dark" width="450"/></td>
   </tr>
   <tr>
     <td><strong>👥 Group</strong><br/><code>@MaximXSticker</code></td>
-    <td><img src="https://telegramcard.vercel.app/?username=MaximXSticker&theme=light" width="300"/></td>
-    <td><img src="https://telegramcard.vercel.app/?username=MaximXSticker&theme=dark" width="300"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=MaximXSticker&theme=light" width="450"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=MaximXSticker&theme=dark" width="450"/></td>
   </tr>
   <tr>
     <td><strong>👤 User</strong><br/><code>@Shineii86</code></td>
-    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&theme=light" width="300"/></td>
-    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&theme=dark" width="300"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&theme=light" width="450"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&theme=dark" width="450"/></td>
   </tr>
 </table>
 
@@ -172,37 +172,37 @@ live stats and verified badge.
   <tr>
     <td align="center">
       <strong>Midnight Blue</strong><br/>
-      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(15,23,42,1)&textColor=%23F8FAFC&subtleTextColor=%2394A3B8&extraColor=%2338BDF8&shadowColor=rgba(0,0,0,0.5)" width="280"/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(15,23,42,1)&textColor=%23F8FAFC&subtleTextColor=%2394A3B8&extraColor=%2338BDF8&shadowColor=rgba(0,0,0,0.5)" width="420"/>
     </td>
     <td align="center">
       <strong>Warm Sunset</strong><br/>
-      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(120,53,15,1)&textColor=%23FEF3C7&subtleTextColor=%23FDE68A&extraColor=%23F59E0B&shadowColor=rgba(0,0,0,0.4)" width="280"/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(120,53,15,1)&textColor=%23FEF3C7&subtleTextColor=%23FDE68A&extraColor=%23F59E0B&shadowColor=rgba(0,0,0,0.4)" width="420"/>
     </td>
     <td align="center">
       <strong>Emerald Forest</strong><br/>
-      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(6,78,59,1)&textColor=%23ECFDF5&subtleTextColor=%23A7F3D0&extraColor=%2334D399&shadowColor=rgba(0,0,0,0.4)" width="280"/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(6,78,59,1)&textColor=%23ECFDF5&subtleTextColor=%23A7F3D0&extraColor=%2334D399&shadowColor=rgba(0,0,0,0.4)" width="420"/>
     </td>
     <td align="center">
       <strong>Royal Purple</strong><br/>
-      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(46,16,101,1)&textColor=%23EDE9FE&subtleTextColor=%23C4B5FD&extraColor=%23A78BFA&shadowColor=rgba(0,0,0,0.4)" width="280"/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(46,16,101,1)&textColor=%23EDE9FE&subtleTextColor=%23C4B5FD&extraColor=%23A78BFA&shadowColor=rgba(0,0,0,0.4)" width="420"/>
     </td>
   </tr>
   <tr>
     <td align="center">
       <strong>Cherry Blossom</strong><br/>
-      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(131,24,67,1)&textColor=%23FCE7F3&subtleTextColor=%23F9A8D4&extraColor=%23F472B6&shadowColor=rgba(0,0,0,0.4)" width="280"/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(131,24,67,1)&textColor=%23FCE7F3&subtleTextColor=%23F9A8D4&extraColor=%23F472B6&shadowColor=rgba(0,0,0,0.4)" width="420"/>
     </td>
     <td align="center">
       <strong>Arctic Frost</strong><br/>
-      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(224,242,254,1)&textColor=%230C4A6E&subtleTextColor=%230369A1&extraColor=%230284C7&shadowColor=rgba(0,0,0,0.08)" width="280"/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(224,242,254,1)&textColor=%230C4A6E&subtleTextColor=%230369A1&extraColor=%230284C7&shadowColor=rgba(0,0,0,0.08)" width="420"/>
     </td>
     <td align="center">
       <strong>Lava Glow</strong><br/>
-      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(124,45,18,1)&textColor=%23FFF7ED&subtleTextColor=%23FED7AA&extraColor=%23FB923C&shadowColor=rgba(0,0,0,0.4)" width="280"/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(124,45,18,1)&textColor=%23FFF7ED&subtleTextColor=%23FED7AA&extraColor=%23FB923C&shadowColor=rgba(0,0,0,0.4)" width="420"/>
     </td>
     <td align="center">
       <strong>Ocean Deep</strong><br/>
-      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(8,47,73,1)&textColor=%23E0F2FE&subtleTextColor=%237DD3FC&extraColor=%2338BDF8&shadowColor=rgba(0,0,0,0.4)" width="280"/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&bgColor=rgba(8,47,73,1)&textColor=%23E0F2FE&subtleTextColor=%237DD3FC&extraColor=%2338BDF8&shadowColor=rgba(0,0,0,0.4)" width="420"/>
     </td>
   </tr>
 </table>
