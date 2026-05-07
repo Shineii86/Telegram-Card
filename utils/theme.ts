@@ -41,6 +41,17 @@ export function resolveTheme(
   };
 }
 
+/** Resolve the `verified` query param: true / false / auto (default). */
+export function resolveVerifiedOverride(
+  params: URLSearchParams,
+  autoDetected: boolean,
+): boolean {
+  const raw = params.get('verified')?.toLowerCase();
+  if (raw === 'true') return true;
+  if (raw === 'false') return false;
+  return autoDetected; // 'auto' or absent → use scraped value
+}
+
 /** Strip non-alphanumeric/underscore characters from username input. */
 export function sanitizeUsername(username: string): string {
   return username.replace(/[^a-zA-Z0-9_]/g, '');
