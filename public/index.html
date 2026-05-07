@@ -1127,6 +1127,14 @@
                            <input type="text" id="shadowColor" placeholder="rgba(0,0,0,0.06)" class="color-text-input">
                        </div>
                    </div>
+                   <div class="form-group">
+                       <label for="verified">Verified Badge</label>
+                       <select id="verified">
+                           <option value="auto">Auto (detect from Telegram)</option>
+                           <option value="true">✅ Show Verified Badge</option>
+                           <option value="false">❌ Hide Verified Badge</option>
+                       </select>
+                   </div>
                </div>
            </div>
 
@@ -1177,6 +1185,11 @@
                    <h4>Custom Theme</h4>
                    <p>@MaximXBots</p>
                </div>
+               <div class="example-item">
+                   <img src="/?username=Shineii86&verified=true&random" alt="Verified Badge Override">
+                   <h4>Verified Badge Override</h4>
+                   <p>@Shineii86 with ?verified=true</p>
+               </div>
            </div>
        </div>
 
@@ -1211,6 +1224,11 @@
                <h3>Easy Deployment</h3>
                <p>Deploy your own instance on Vercel, Netlify, Railway, or any serverless platform. Full source code available on GitHub.</p>
            </div>
+           <div class="feature">
+               <div class="feature-icon"><i class="fas fa-circle-check"></i></div>
+               <h3>Verified Badge</h3>
+               <p>Add a verified badge to any card — even if your channel, group, bot, or account isn't verified by Telegram. Full control via URL parameter.</p>
+           </div>
        </div>
 
        <div class="usage">
@@ -1234,6 +1252,11 @@
            <p>Customize colors, fonts, and shadows to match your brand:</p>
            <div class="code-block">https://telegramcard.vercel.app/?username=MaximXStickers&bgColor=rgba(30,41,59,1)&textColor=%23F1F5F9&subtleTextColor=%23CBD5E1&extraColor=%23F59E0B&shadowColor=rgba(0,0,0,0.2)&fontFamily=system-ui</div>
 
+           <h3><i class="fas fa-circle-check"></i> Verified Badge</h3>
+           <p>Add or hide the verified badge on any card, regardless of Telegram's actual verification status:</p>
+           <div class="code-block">https://telegramcard.vercel.app/?username=YourChannel&verified=true</div>
+           <p>Available values: <strong>true</strong> (force show), <strong>false</strong> (force hide), <strong>auto</strong> (default — detect from Telegram)</p>
+
            <h3><i class="fas fa-list"></i> Available Parameters</h3>
            <p>Customize your cards with these URL parameters:</p>
            <ul style="margin: 1rem 0; padding-left: 2rem; color: var(--text-secondary);">
@@ -1245,6 +1268,7 @@
                <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">extraColor</strong> - Accent color for counts</li>
                <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">shadowColor</strong> - Box shadow color</li>
                <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">fontFamily</strong> - Font family name</li>
+               <li style="margin-bottom: 0.5rem;"><strong style="color: var(--primary);">verified</strong> - Verified badge: <code>true</code> (show), <code>false</code> (hide), <code>auto</code> (default)</li>
            </ul>
 
            <h3><i class="fas fa-lightbulb"></i> Use Cases</h3>
@@ -1372,6 +1396,9 @@
                    picker.value = '#000000';
                }
            });
+           // Reset verified badge to auto
+           const verifiedSelect = document.getElementById('verified');
+           if (verifiedSelect) verifiedSelect.value = 'auto';
        }
 
        function toggleAdvanced() {
@@ -1435,7 +1462,7 @@
                });
            } else {
                // Use advanced options for custom preset
-               const advancedFields = ['theme', 'bgColor', 'textColor', 'subtleTextColor', 'extraColor', 'shadowColor', 'fontFamily'];
+               const advancedFields = ['theme', 'bgColor', 'textColor', 'subtleTextColor', 'extraColor', 'shadowColor', 'fontFamily', 'verified'];
 
                advancedFields.forEach(field => {
                    const input = document.getElementById(field);

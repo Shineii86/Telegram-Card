@@ -68,6 +68,7 @@ The widget scrapes public metadata from Telegram's `t.me` preview pages using JS
 | **🔒 Privacy First** | No data persistence; ephemeral request processing |
 | **🌍 Global CDN** | 100+ edge locations worldwide |
 | **🛡️ Security** | Middleware-enforced headers (CSP, nosniff, no-referrer) |
+| **✅ Verified Badge** | Force show/hide verified badge on any entity via `verified` parameter |
 
 ---
 
@@ -146,6 +147,7 @@ https://telegramcard.vercel.app/
 | `extraColor` | `string` | ❌ | Theme-based | Accent/highlight color |
 | `shadowColor` | `string` | ❌ | Theme-based | Card shadow color |
 | `fontFamily` | `string` | ❌ | `Inter, sans-serif` | Font stack (CSS font-family) |
+| `verified` | `string` | ❌ | `auto` | Verified badge: `true` (force show), `false` (force hide), `auto` (detect from Telegram) |
 
 ### Color Formats
 
@@ -205,6 +207,20 @@ Supports all CSS color formats:
 ![Custom](https://telegramcard.vercel.app/?username=QuinxNetwork&bgColor=rgba(30,41,59,1)&textColor=%23F1F5F9&subtleTextColor=%23CBD5E1&extraColor=%23F59E0B&shadowColor=rgba(0,0,0,0.2)&fontFamily=system-ui)
 ```
 ![Custom](https://telegramcard.vercel.app/?username=QuinxNetwork&bgColor=rgba(30,41,59,1)&textColor=%23F1F5F9&subtleTextColor=%23CBD5E1&extraColor=%23F59E0B&shadowColor=rgba(0,0,0,0.2)&fontFamily=system-ui)
+
+### Verified Badge Override
+
+Add a verified badge to any card — even if the entity isn't verified by Telegram:
+
+```markdown
+![Verified](https://telegramcard.vercel.app/?username=YourChannel&verified=true)
+```
+
+| Value | Behavior |
+|-------|----------|
+| `auto` (default) | Detect from Telegram page |
+| `true` | Force show badge |
+| `false` | Force hide badge |
 
 ---
 
