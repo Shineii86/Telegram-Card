@@ -51,7 +51,7 @@
 
 **Telegram Card Widget** is a high-performance, serverless solution for generating dynamic Open Graph images for Telegram entities. Built with modern web technologies and deployed on the edge, it provides real-time card generation for profiles, channels, groups, and bots with sub-second response times.
 
-The widget leverages the Telegram MTProto API to fetch public metadata and generates optimized SVG/PNG cards using Vercel's Edge Functions and the Satori rendering engine.
+The widget scrapes public metadata from Telegram's `t.me` preview pages using JSDOM and generates optimized PNG cards using `@vercel/og` and the Satori rendering engine.
 
 ---
 
@@ -67,6 +67,7 @@ The widget leverages the Telegram MTProto API to fetch public metadata and gener
 | **🖼️ OG Image Ready** | Perfect Open Graph metadata for social sharing |
 | **🔒 Privacy First** | No data persistence; ephemeral request processing |
 | **🌍 Global CDN** | 100+ edge locations worldwide |
+| **🛡️ Security** | Middleware-enforced headers (CSP, nosniff, no-referrer) |
 
 ---
 
@@ -80,8 +81,7 @@ The widget leverages the Telegram MTProto API to fetch public metadata and gener
 - **[@vercel/og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation)** - Open Graph image generation library
 
 ### APIs & Data Sources
-- **Telegram MTProto API** - Public metadata retrieval
-- **Telegram Bot API** - Fallback data fetching
+- **Telegram t.me web pages** - Public metadata scraping via JSDOM
 
 ### Infrastructure
 - **Vercel Edge Network** - Global CDN and edge compute
@@ -145,8 +145,7 @@ https://telegramcard.vercel.app/
 | `subtleTextColor` | `string` | ❌ | Theme-based | Secondary/muted text color |
 | `extraColor` | `string` | ❌ | Theme-based | Accent/highlight color |
 | `shadowColor` | `string` | ❌ | Theme-based | Card shadow color |
-| `fontFamily` | `string` | ❌ | `system-ui` | Font stack (CSS font-family) |
-| `format` | `string` | ❌ | `png` | Output format: `png`, `svg` |
+| `fontFamily` | `string` | ❌ | `Inter, sans-serif` | Font stack (CSS font-family) |
 
 ### Color Formats
 
@@ -160,18 +159,17 @@ Supports all CSS color formats:
 
 | Header | Value | Description |
 |--------|-------|-------------|
-| `Content-Type` | `image/png` or `image/svg+xml` | Image format |
-| `Cache-Control` | `public, max-age=3600, stale-while-revalidate=86400` | Caching strategy |
-| `X-Entity-Type` | `user`, `bot`, `channel`, `group` | Detected entity type |
+| `Content-Type` | `image/png` | Image format |
+| `Cache-Control` | `public, max-age=7200` | Caching strategy (2 hours) |
+| `Content-Security-Policy` | Strict CSP | Prevents misuse of the image response |
+| `X-Content-Type-Options` | `nosniff` | MIME-type sniffing protection |
 
 ### Error Responses
 
 | Status Code | Description | Resolution |
 |-------------|-------------|------------|
-| `400` | Missing username | Provide `?username=` parameter |
-| `404` | Entity not found | Verify username exists and is public |
-| `500` | Generation error | Retry request or check service status |
-| `429` | Rate limited | Implement client-side caching |
+| 200 (with error card) | Entity not found or scrape failure | Verify username exists and is public |
+| 404 | Homepage not found | Ensure `public/index.html` is present |
 
 ---
 
@@ -198,7 +196,7 @@ Supports all CSS color formats:
 | **Channel** | `?username=MaximXStickers` | ![Channel](https://telegramcard.vercel.app/?username=MaximXStickers&theme=light) |
 | **Bot** | `?username=MikoReactionsBot` | ![Bot](https://telegramcard.vercel.app/?username=MikoReactionsBot&theme=light) |
 | **Group** | `?username=MaximXSticker` | ![Group](https://telegramcard.vercel.app/?username=MaximXSticker&theme=light) |
-| **User** | `?username=Shinei` | ![User](https://telegramcard.vercel.app/?username=Shineii86&theme=light) |
+| **User** | `?username=Shineii86` | ![User](https://telegramcard.vercel.app/?username=Shineii86&theme=light) |
 
 ### Advanced Customization
 
@@ -233,8 +231,6 @@ Supports all CSS color formats:
 
 | Variable | Required | Description | Default |
 |----------|----------|-------------|---------|
-| `TELEGRAM_BOT_TOKEN` | ❌ | For enhanced metadata fetching | - |
-| `CACHE_TTL` | ❌ | Cache duration in seconds | `3600` |
 | `NODE_ENV` | ✅ | Environment mode | `production` |
 
 ---
@@ -257,9 +253,6 @@ cd Telegram-Card
 # Install dependencies
 npm install
 
-# Configure environment (optional)
-cp .env.example .env.local
-
 # Start development server
 npm run dev
 ```
@@ -272,7 +265,38 @@ npm run dev
 | `npm run build` | Production build with static optimization |
 | `npm run start` | Start production server |
 | `npm run lint` | Run ESLint code analysis |
-| `npm run type-check` | Run TypeScript compiler check |
+
+### Project Structure
+
+```
+Telegram-Card/
+├── app/
+│   ├── globals.css          # Base styles
+│   ├── layout.tsx           # Root layout with metadata
+│   └── route.tsx            # Main API route (card generation)
+├── components/
+│   └── TelegramCard.tsx     # Card & error card React components
+├── types/
+│   └── enums.ts             # TypeScript types & enums
+├── utils/
+│   ├── cache.ts             # In-memory LRU-style cache (max 500 entries)
+│   ├── errors.ts            # Custom error classes
+│   ├── parsers.ts           # HTML parsing utilities
+│   ├── scrapeTelegram.ts    # Telegram page scraper
+│   └── theme.ts             # Theme resolution & username sanitization
+├── public/
+│   ├── index.html           # Landing page with card generator UI
+│   └── og.png               # Open Graph preview image
+├── middleware.ts             # Security headers middleware
+├── next.config.ts            # Next.js configuration
+├── tsconfig.json             # TypeScript configuration
+├── vercel.json               # Vercel deployment config
+├── netlify.toml              # Netlify deployment config
+├── wrangler.toml             # Cloudflare Workers config
+├── render.yaml               # Render deployment config
+├── app.json                  # Heroku deployment config
+└── package.json              # Dependencies & scripts
+```
 
 ### Development Workflow
 
@@ -304,9 +328,8 @@ We welcome contributions from the community! Please review our contribution guid
 1. Check existing [Issues](https://github.com/Shineii86/Telegram-Card/issues) and [PRs](https://github.com/Shineii86/Telegram-Card/pulls)
 2. Fork the repository and create your branch
 3. Ensure code follows existing style conventions
-4. Add tests for new functionality
-5. Update documentation as needed
-6. Submit Pull Request with detailed description
+4. Update documentation as needed
+5. Submit Pull Request with detailed description
 
 ### Code of Conduct
 
@@ -319,11 +342,11 @@ This project adheres to the [Contributor Covenant Code of Conduct](https://www.c
 ### Core Dependencies
 - **[Vercel](https://vercel.com/)** - Edge infrastructure and OG image generation
 - **[Next.js Team](https://nextjs.org/)** - React framework and Satori renderer
-- **[Telegram](https://telegram.org/)** - MTProto API and platform
+- **[Telegram](https://telegram.org/)** - Public web preview pages
 
 ### Open Source Libraries
 - [Satori](https://github.com/vercel/satori) - Enlightened library for converting HTML/CSS to SVG
-- [Resvg](https://github.com/RazrFalcon/resvg) - High-quality SVG rendering
+- [JSDOM](https://github.com/jsdom/jsdom) - JavaScript DOM implementation for Node.js
 - [Twemoji](https://twemoji.twitter.com/) - Twitter emoji support
 
 ### Community
@@ -342,14 +365,13 @@ This project adheres to the [Contributor Covenant Code of Conduct](https://www.c
 
 **Special Thanks**
 - The Vercel team for `@vercel/og` and edge function innovations
-- Telegram for maintaining an open API ecosystem
+- Telegram for maintaining open public preview pages
 
 ---
 
 ## 📄 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
-
 
 ### Third-Party Licenses
 
@@ -362,18 +384,6 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes.
 
-### Recent Updates
-
-**v2.1.0** (2026-2-21)
-- Added custom color parameter support
-- Improved caching strategy
-- Enhanced error handling
-
-**v2.0.0** (2026-1-26)
-- Migrated to Next.js 15 App Router
-- Edge function optimization
-- TypeScript strict mode implementation
-
 ---
 
 ## 🆘 Support
@@ -385,7 +395,7 @@ See [CHANGELOG.md](CHANGELOG.md) for a detailed history of changes.
 
 ### Professional Support
 For enterprise support or custom implementations:
-- **Email**: [hello@ikx7a.dev](ikx7a@hotmail.com)
+- **Email**: [ikx7a@hotmail.com](mailto:ikx7a@hotmail.com)
 - **Website**: [QuinxNetwork.com](https://github.com/QuinxNetwork)
 
 ---
@@ -396,7 +406,7 @@ For enterprise support or custom implementations:
 
 If you discover a security vulnerability, please **DO NOT** open a public issue. Instead:
 
-1. Email security concerns to: [security@ikx7a.com](mailto:ikx7a@hotmail.com)
+1. Email security concerns to: [ikx7a@hotmail.com](mailto:ikx7a@hotmail.com)
 2. Include detailed description and reproduction steps
 3. Allow 48 hours for initial response
 4. Coordinate disclosure timeline
@@ -405,8 +415,9 @@ If you discover a security vulnerability, please **DO NOT** open a public issue.
 
 - No persistent data storage
 - Input sanitization on all parameters
+- Cache capped at 500 entries (auto-eviction)
+- CSP, nosniff, and no-referrer headers via middleware
 - Rate limiting on API endpoints
-- CSP headers on all responses
 
 ---
 
@@ -421,9 +432,9 @@ If you discover a security vulnerability, please **DO NOT** open a public issue.
 <a href="https://github.com/Shineii86/Telegram-Card">
 <img src="https://github.com/Shineii86/AniPay/blob/main/Source/Banner6.png" alt="Banner">
 </a>
-  
+
   *For inquiries or collaborations*
-     
+
 [![Telegram Badge](https://img.shields.io/badge/-Telegram-2CA5E0?style=flat&logo=Telegram&logoColor=white)](https://telegram.me/Shineii86 "Contact on Telegram")
 [![Instagram Badge](https://img.shields.io/badge/-Instagram-C13584?style=flat&logo=Instagram&logoColor=white)](https://instagram.com/ikx7.a "Follow on Instagram")
 [![Pinterest Badge](https://img.shields.io/badge/-Pinterest-E60023?style=flat&logo=Pinterest&logoColor=white)](https://pinterest.com/ikx7a "Follow on Pinterest")
