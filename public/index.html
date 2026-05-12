@@ -1135,6 +1135,10 @@
                            <option value="false">❌ Hide Verified Badge</option>
                        </select>
                    </div>
+                   <div class="form-group">
+                       <label for="photo">Custom Photo URL</label>
+                       <input type="text" id="photo" placeholder="https://example.com/avatar.png (overrides Telegram photo)">
+                   </div>
                </div>
            </div>
 
@@ -1462,7 +1466,7 @@
                });
            } else {
                // Use advanced options for custom preset
-               const advancedFields = ['theme', 'bgColor', 'textColor', 'subtleTextColor', 'extraColor', 'shadowColor', 'fontFamily', 'verified'];
+               const advancedFields = ['theme', 'bgColor', 'textColor', 'subtleTextColor', 'extraColor', 'shadowColor', 'fontFamily', 'verified', 'photo'];
 
                advancedFields.forEach(field => {
                    const input = document.getElementById(field);

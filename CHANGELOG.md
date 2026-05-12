@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Scraper no longer fails on missing avatar**: `scrapeAndCache()` only requires `title` to be present; `image` is now optional and resolved downstream
 
 ### Added
+- **`photo` query parameter**: Custom avatar URL override — pass any `http`/`https` image URL to replace the Telegram profile photo on the card (e.g. `?photo=https://example.com/avatar.png`)
+- **`sanitizePhotoUrl()` utility**: Validates custom photo URLs (protocol check, malformed URL protection)
+- **Card builder UI**: New "Custom Photo URL" input in Advanced Options on the landing page
 - **`generateDefaultAvatar()` utility**: Generates a themed SVG data-URI avatar with the user's first letter as initial — adapts to light/dark theme automatically
 - **`image` field is now optional** in `ScrapeResult` interface (`string | null`) to properly represent users without profile photos
 - **ErrorCard accepts `isDark` prop**: Error cards now render with themed colors, shadows, accent colors, and corner gradient — consistent with the main card design

@@ -57,6 +57,20 @@ export function sanitizeUsername(username: string): string {
   return username.replace(/[^a-zA-Z0-9_]/g, '');
 }
 
+/** Validate and sanitize a custom photo URL. Returns null if invalid. */
+export function sanitizePhotoUrl(raw: string | null): string | null {
+  if (!raw) return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+  try {
+    const url = new URL(trimmed);
+    if (url.protocol !== 'http:' && url.protocol !== 'https:') return null;
+    return url.href;
+  } catch {
+    return null;
+  }
+}
+
 /** Generate a default avatar SVG data-URI with the user's initial letter. */
 export function generateDefaultAvatar(username: string, isDark: boolean): string {
   const initial = (username.charAt(0) || '?').toUpperCase();

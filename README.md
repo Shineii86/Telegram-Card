@@ -856,6 +856,7 @@ GET https://telegramcard.vercel.app/
 | `shadowColor` | `string` | ❌ | *theme* | Card drop shadow |
 | `fontFamily` | `string` | ❌ | `Inter, sans-serif` | CSS font-family stack |
 | `verified` | `string` | ❌ | `auto` | `true` = force show, `false` = force hide, `auto` = detect |
+| `photo` | `string` | ❌ | — | Custom avatar URL — overrides Telegram profile photo (must be `http`/`https`) |
 
 ### Color Formats
 
