@@ -47,8 +47,10 @@
 - [Why This Exists](#-why-this-exists)
 - [What Makes This Different](#-what-makes-this-different)
 - [See It In Action](#-see-it-in-action)
-- [Error Cards](#-error-cards)
-- [Verified Badge Showcase](#-verified-badge-showcase)
+- [🆕 What's New in v2.5.0](#-whats-new-in-v250)
+- [🚨 Error Cards](#-error-cards)
+- [🖼️ Default Avatar & Custom Photo](#️-default-avatar--custom-photo)
+- [✅ Verified Badge Showcase](#-verified-badge-showcase)
 - [Features](#-features)
 - [How It Works](#-how-it-works)
 - [Architecture Deep Dive](#-architecture-deep-dive)
@@ -209,9 +211,68 @@ live stats and verified badge.
 
 ---
 
+## 🆕 What's New in v2.5.0
+
+### Custom Photo Override
+
+Override any Telegram profile photo with your own image URL using the new `?photo=` parameter:
+
+<table>
+  <tr>
+    <td align="center">
+      <strong>Default (Telegram Photo)</strong><br/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&theme=dark" width="420"/>
+    </td>
+    <td align="center">
+      <strong>Custom Photo Override</strong><br/>
+      <img src="https://telegramcard.vercel.app/?username=Shineii86&photo=https://i.pravatar.cc/300?img=12&theme=dark" width="420"/>
+    </td>
+  </tr>
+</table>
+
+### Theme-Aware Error Cards
+
+Error cards now match your theme — dark errors in dark mode, light errors in light mode:
+
+<table>
+  <tr>
+    <td align="center">
+      <strong>☀️ Light Error</strong><br/>
+      <img src="https://telegramcard.vercel.app/?username=nonexistentuser123456&theme=light" width="420"/>
+    </td>
+    <td align="center">
+      <strong>🌙 Dark Error</strong><br/>
+      <img src="https://telegramcard.vercel.app/?username=nonexistentuser123456&theme=dark" width="420"/>
+    </td>
+  </tr>
+</table>
+
+### Default Avatar for Missing Photos
+
+Accounts without profile photos now show a themed initial-letter avatar instead of an error card. The avatar adapts to light/dark theme automatically.
+
+---
+
 ## 🚨 Error Cards
 
 When something goes wrong (username not found, Telegram down, scrape failure), the API returns a **styled error card** instead of a broken image. Your README will never show a broken `<img>` tag.
+
+### Theme-Aware Error Cards
+
+Error cards automatically match your theme — no more jarring white cards in dark mode:
+
+<table>
+  <tr>
+    <th>☀️ Light Error Card</th>
+    <th>🌙 Dark Error Card</th>
+  </tr>
+  <tr>
+    <td><img src="https://telegramcard.vercel.app/?username=nonexistentuser123456&theme=light" width="450"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=nonexistentuser123456&theme=dark" width="450"/></td>
+  </tr>
+</table>
+
+### Error Scenarios
 
 | Error Scenario | What You See |
 |----------------|-------------|
@@ -227,16 +288,99 @@ When something goes wrong (username not found, Telegram down, scrape failure), t
 
 ---
 
+## 🖼️ Default Avatar & Custom Photo
+
+### Default Avatar — No Profile Photo? No Problem
+
+When a Telegram account has no profile photo, the card automatically generates a **themed initial-letter avatar** instead of showing an error:
+
+<table>
+  <tr>
+    <th>How It Works</th>
+    <th>Result</th>
+  </tr>
+  <tr>
+    <td>
+      <strong>Light theme:</strong> Soft gray circle + blue initial<br/>
+      <strong>Dark theme:</strong> Dark circle + light blue initial<br/><br/>
+      The first letter of the username is used as the avatar.<br/>
+      Colors adapt to the active theme automatically.
+    </td>
+    <td align="center">
+      <em>No public example available — all demo accounts have photos.</em><br/><br/>
+      If your account has no photo, your card will show a clean<br/>
+      circular avatar with your initial letter instead of an error.
+    </td>
+  </tr>
+</table>
+
+### Custom Photo Override — `?photo=` Parameter
+
+Override the Telegram profile photo with **any image URL**. Useful for branding, testing, or accounts without photos:
+
+<table>
+  <tr>
+    <th>Default (Telegram Photo)</th>
+    <th>Custom Photo (Override)</th>
+  </tr>
+  <tr>
+    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&theme=dark" width="450"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&photo=https://i.pravatar.cc/300?img=12&theme=dark" width="450"/></td>
+  </tr>
+</table>
+
+```
+# Use Telegram's profile photo (default)
+https://telegramcard.vercel.app/?username=Shineii86
+
+# Override with a custom image
+https://telegramcard.vercel.app/?username=Shineii86&photo=https://example.com/avatar.png
+
+# Works with themes and colors too
+https://telegramcard.vercel.app/?username=Shineii86&photo=https://example.com/avatar.png&theme=dark
+```
+
+### Avatar Resolution Priority
+
+The card resolves the avatar image in this order:
+
+| Priority | Source | When Used |
+|:--------:|--------|-----------|
+| 1️⃣ | `?photo=` parameter | Custom URL provided by user |
+| 2️⃣ | Telegram `<img>` element | Profile has a public photo |
+| 3️⃣ | `og:image` / `twitter:image` meta | Photo only available via Open Graph |
+| 4️⃣ | Default initial avatar | No photo anywhere |
+
+---
+
 ## ✅ Verified Badge Showcase
 
 The `verified` parameter gives you full control over the blue checkmark:
 
+### Visual Comparison
+
 <table>
   <tr>
-    <th>Value</th>
-    <th>Behavior</th>
-    <th>Example</th>
+    <th>Auto (default)</th>
+    <th>Force Show ✅</th>
+    <th>Force Hide ❌</th>
   </tr>
+  <tr>
+    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&theme=dark" width="400"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&verified=true&theme=dark" width="400"/></td>
+    <td><img src="https://telegramcard.vercel.app/?username=Shineii86&verified=false&theme=dark" width="400"/></td>
+  </tr>
+  <tr>
+    <td align="center"><code>?verified=auto</code><br/>Detects from Telegram</td>
+    <td align="center"><code>?verified=true</code><br/>Always shows badge</td>
+    <td align="center"><code>?verified=false</code><br/>Always hides badge</td>
+  </tr>
+</table>
+
+### Parameter Values
+
+| Value | Behavior | Example |
+|-------|----------|---------|
   <tr>
     <td><code>auto</code> (default)</td>
     <td>Detect from Telegram's page metadata</td>
