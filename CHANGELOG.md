@@ -10,7 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **Theme-aware error cards**: Error cards now respect the active theme — dark mode errors use dark backgrounds with light text, matching the main card style instead of always showing a jarring white card
 - **Default avatar for users without profile photos**: Users without a Telegram profile photo no longer trigger an error card — a themed avatar with the user's initial letter is generated instead
-- **og:image fallback for avatar**: Scraper now checks `og:image` meta tags when the primary profile photo element is missing, recovering avatars that Telegram only exposes via Open Graph metadata
+- **og:image fallback for avatar**: Scraper now checks `og:image` and `twitter:image` meta tags when the primary profile photo element is missing, recovering avatars that Telegram only exposes via Open Graph metadata
+- **Telegram logo filter**: Default Telegram logos (`t_logo`, `website_icon`) are now filtered out from meta tag fallbacks so they are never used as user avatars
 - **Scrape resilience**: `extractImage()` now filters out blank/placeholder images (e.g. `blank.gif`, transparent data URIs) instead of returning them as valid URLs
 - **Scraper no longer fails on missing avatar**: `scrapeAndCache()` only requires `title` to be present; `image` is now optional and resolved downstream
 

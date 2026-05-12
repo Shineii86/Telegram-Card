@@ -61,16 +61,29 @@ export function extractImage(doc: Document): string | null {
     }
   }
 
-  // Fallback: og:image meta tag
+  // Fallback 1: og:image meta tag
   const ogImage = doc.querySelector('meta[property="og:image"]');
-  if (ogImage) {
-    const content = ogImage.getAttribute('content');
-    if (content && content.trim() !== '' && content.startsWith('http')) {
-      return content;
-    }
-  }
+  const ogContent = ogImage?.getAttribute('content');
+  if (isValidAvatarUrl(ogContent)) return ogContent;
+
+  // Fallback 2: twitter:image meta tag
+  const twImage = doc.querySelector('meta[name="twitter:image"], meta[property="twitter:image"]');
+  const twContent = twImage?.getAttribute('content');
+  if (isValidAvatarUrl(twContent)) return twContent;
 
   return null;
+}
+
+/** Check if a URL is a valid user avatar (not Telegram's default logo/placeholder). */
+function isValidAvatarUrl(url: string | null | undefined): url is string {
+  if (!url || url.trim() === '' || !url.startsWith('http')) return false;
+  // Filter out Telegram's default logos and placeholders
+  const lower = url.toLowerCase();
+  if (lower.includes('telegram.org/img/t_logo')) return false;
+  if (lower.includes('telegram.org/img/website_icon')) return false;
+  if (lower.includes('blank.gif')) return false;
+  if (lower.startsWith('data:')) return false;
+  return true;
 }
 
 export function extractVerifiedStatus(doc: Document): boolean {
