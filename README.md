@@ -217,10 +217,13 @@ When something goes wrong (username not found, Telegram down, scrape failure), t
 |----------------|-------------|
 | Username doesn't exist | Clean error card with Telegram logo + "Unable to load Telegram profile" + specific reason |
 | Private account | Same styled error card with appropriate message |
+| No profile photo | Card with themed initial-letter avatar instead of error |
 | Telegram rate limiting | Error card suggesting retry |
 | Network failure | Graceful error card, never a 404 or empty response |
 
 > **Design decision:** The API always returns HTTP `200` for card requests — even errors produce a valid PNG. This is intentional: broken images in READMEs look terrible; a styled error card is always better.
+>
+> **Theme-aware:** Error cards automatically match the requested theme — dark mode errors use dark backgrounds with light text; light mode errors use white backgrounds with dark text.
 
 ---
 
@@ -296,7 +299,10 @@ https://telegramcard.vercel.app/?username=Shineii86&verified=false
 - **Auto-detects** User, Bot, Channel, Group
 - **Scrapes live stats** — subscribers, members, online
 - **Verified badge** detection from Telegram metadata
-- **Graceful error cards** — never broken images
+- **Graceful error cards** — never broken images, theme-aware
+- **Default avatar** — initial-letter SVG for accounts without profile photos
+- **Custom photo override** — `?photo=` parameter for any image URL
+- **Multi-source avatar** — photo element → og:image → twitter:image → default
 - **Entity-aware layout** — adapts stats display per type
 
 </td>
@@ -516,12 +522,12 @@ Telegram (t.me)          JSDOM Parser           Theme Engine
 
 | Module | Lines | Responsibility |
 |--------|:-----:|---------------|
-| `app/route.tsx` | ~85 | Request handling, cache orchestration, response assembly |
-| `components/TelegramCard.tsx` | ~180 | JSX card layout (TelegramCard + ErrorCard) |
+| `app/route.tsx` | ~95 | Request handling, cache orchestration, photo override, response assembly |
+| `components/TelegramCard.tsx` | ~200 | JSX card layout (TelegramCard + theme-aware ErrorCard) |
 | `utils/scrapeTelegram.ts` | ~80 | Fetch & parse Telegram preview pages via JSDOM |
-| `utils/theme.ts` | ~45 | Theme resolution, verified override, username sanitizer |
+| `utils/theme.ts` | ~70 | Theme resolution, verified override, username/photo sanitizer, default avatar |
 | `utils/cache.ts` | ~50 | In-memory LRU cache with TTL and FIFO eviction |
-| `utils/parsers.ts` | ~60 | HTML entity parsing (type, stats, avatar extraction) |
+| `utils/parsers.ts` | ~80 | HTML parsing (type, stats, multi-source avatar extraction) |
 | `utils/errors.ts` | ~20 | Custom error classes |
 | `types/enums.ts` | ~30 | TypeScript interfaces and enums |
 | `middleware.ts` | ~25 | Security header enforcement |
@@ -626,6 +632,16 @@ https://telegramcard.vercel.app/?username=Shineii86
   &textColor=%23F8FAFC
   &extraColor=%2338BDF8
 ```
+
+### With Custom Photo
+
+Override the Telegram profile photo with any image URL:
+
+```
+https://telegramcard.vercel.app/?username=Shineii86&photo=https://example.com/avatar.png
+```
+
+Useful for accounts without profile photos, or when you want a specific image on the card.
 
 ---
 
@@ -1488,8 +1504,16 @@ The landing page and generated cards include comprehensive SEO metadata:
 |-------|-----|
 | Username misspelled | Double-check spelling (case-insensitive) |
 | Private account | Only public Telegram entities work |
+| No profile photo | Shows default initial-avatar automatically — use `?photo=` for custom image |
 | Rate limited | Wait a few minutes, retry |
 | Username has special chars | Only `[a-zA-Z0-9_]` are valid |
+
+### Custom photo not showing
+
+- Ensure the `photo` URL starts with `http://` or `https://`
+- The image must be publicly accessible (no auth required)
+- URL-encode special characters in the URL
+- Example: `?photo=https%3A%2F%2Fexample.com%2Favatar.png`
 
 ### Card shows old data
 
@@ -1607,6 +1631,10 @@ Yes! The project is MIT licensed. Use it in personal projects, commercial produc
 - [x] Security middleware (CSP, nosniff, no-referrer)
 - [x] Error card fallbacks
 - [x] Interactive card builder with color pickers
+- [x] Theme-aware error cards (dark/light matching)
+- [x] Default avatar with user initial for missing photos
+- [x] Custom photo URL override (`?photo=`)
+- [x] og:image / twitter:image fallback for avatars
 
 ### Planned 🚧
 
@@ -1683,7 +1711,7 @@ See **[CHANGELOG.md](CHANGELOG.md)** for the complete version history.
 
 ### Latest Release
 
-**[v2.4.0]** — Comprehensive README overhaul with architecture diagrams, performance benchmarks, security model, troubleshooting guide, copy-paste snippets for 10+ frameworks, 12 ready-made palettes, programmatic usage in 5 languages, interactive card builder docs, SEO metadata docs, error card showcase, verified badge showcase, and roadmap.
+**[v2.5.0]** — Custom photo URL override (`?photo=`), default avatar with user initial for accounts without profile photos, theme-aware error cards (dark/light matching), og:image + twitter:image fallback for avatars, Telegram logo filtering from meta fallbacks, card builder UI updates.
 
 ---
 
