@@ -76,7 +76,7 @@ export function TelegramCard({ result, theme, isDark }: CardProps) {
           }}
         >
           <img
-            src={result.image}
+            src={result.image ?? undefined}
             alt={`${result.username} profile picture`}
             width={120}
             height={120}

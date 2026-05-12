@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.1] - 2026-05-12
+
+### Fixed
+- **Vercel build failure**: Fixed TypeScript type error where `result.image` (`string | null`) was passed directly to `<img src>` which requires `string | undefined` — used nullish coalescing (`?? undefined`) to resolve the type mismatch that caused all recent Vercel deployments to fail with `missing_name` error
+
 ## [2.5.0] - 2026-05-12
 
 ### Fixed
