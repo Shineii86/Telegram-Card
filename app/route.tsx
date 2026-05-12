@@ -32,11 +32,12 @@ function imageHeaders(): Headers {
 
 export async function GET(request: NextRequest) {
   let errorMessage = 'Please check the username and try again';
+  let isDark = false;
 
   try {
     const { searchParams } = new URL(request.url);
     const username = searchParams.get('username');
-    const isDark = searchParams.get('theme') === 'dark';
+    isDark = searchParams.get('theme') === 'dark';
 
     // Serve landing page when no username is given
     if (!username) {
@@ -73,7 +74,7 @@ export async function GET(request: NextRequest) {
       errorMessage = error.message;
     }
 
-    const fallback = new ImageResponse(<ErrorCard message={errorMessage} />, {
+    const fallback = new ImageResponse(<ErrorCard message={errorMessage} isDark={isDark} />, {
       width: 700,
       height: 250,
       emoji: 'fluent',

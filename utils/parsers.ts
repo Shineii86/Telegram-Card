@@ -52,11 +52,25 @@ export function extractDescription(doc: Document): string | null {
 }
 
 export function extractImage(doc: Document): string | null {
+  // Primary: dedicated photo element
   const img = doc.querySelector('img.tgme_page_photo_image');
-  if (!img) return null;
-  const src = img.getAttribute('src');
-  if (!src || src.trim() === '' || src.includes('blank.gif') || src.includes('data:image/gif')) return null;
-  return src;
+  if (img) {
+    const src = img.getAttribute('src');
+    if (src && src.trim() !== '' && !src.includes('blank.gif') && !src.includes('data:image/gif')) {
+      return src;
+    }
+  }
+
+  // Fallback: og:image meta tag
+  const ogImage = doc.querySelector('meta[property="og:image"]');
+  if (ogImage) {
+    const content = ogImage.getAttribute('content');
+    if (content && content.trim() !== '' && content.startsWith('http')) {
+      return content;
+    }
+  }
+
+  return null;
 }
 
 export function extractVerifiedStatus(doc: Document): boolean {

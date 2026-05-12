@@ -179,7 +179,13 @@ export function TelegramCard({ result, theme, isDark }: CardProps) {
 }
 
 /** Error fallback card */
-export function ErrorCard({ message }: { message: string }) {
+export function ErrorCard({ message, isDark = false }: { message: string; isDark?: boolean }) {
+  const bg = isDark ? 'rgba(42, 42, 42, 0.95)' : 'rgba(255, 255, 255, 0.95)';
+  const textColor = isDark ? '#FFFFFF' : '#333333';
+  const subtleColor = isDark ? '#AAAAAA' : '#666666';
+  const shadow = isDark ? '0 16px 40px rgba(0,0,0,0.4)' : '0 16px 40px rgba(0,0,0,0.15)';
+  const accentColor = isDark ? '#8DD5FF' : '#0088CC';
+
   return (
     <div
       style={{
@@ -197,24 +203,41 @@ export function ErrorCard({ message }: { message: string }) {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          backgroundColor: bg,
           padding: '32px 40px',
           borderRadius: '24px',
           width: '600px',
-          boxShadow: '0 16px 40px rgba(0,0,0,0.15)',
+          boxShadow: shadow,
           fontFamily: 'Inter, sans-serif',
-          color: '#333333',
+          color: textColor,
           gap: '16px',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
         <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
           <path
             d="M12 0C5.376 0 0 5.376 0 12C0 18.624 5.376 24 12 24C18.624 24 24 18.624 24 12C24 5.376 18.624 0 12 0ZM17.568 8.16C17.388 10.056 16.608 14.664 16.212 16.788C16.044 17.688 15.708 17.988 15.396 18.024C14.7 18.084 14.172 17.568 13.5 17.124C12.444 16.428 11.844 16.02 10.824 15.336C9.636 14.544 10.404 14.112 11.088 13.416C11.268 13.236 14.34 10.44 14.4 10.188C14.412 10.152 14.412 10.044 14.352 9.996C14.292 9.948 14.208 9.96 14.136 9.972C14.04 9.984 12.24 11.184 8.76 13.548C8.304 13.848 7.884 13.992 7.512 13.98C7.104 13.968 6.312 13.74 5.724 13.548C5.004 13.308 4.428 13.18 4.476 12.78C4.5 12.576 4.788 12.36 5.34 12.144C9.06 10.32 11.58 9.108 12.876 8.496C16.5 6.768 17.304 6.456 17.82 6.456C17.928 6.456 18.18 6.48 18.336 6.636C18.456 6.756 18.492 6.912 18.504 7.032C18.516 7.104 18.528 7.296 18.516 7.464C18.504 7.608 17.568 8.16 17.568 8.16Z"
-            fill="#0088CC"
+            fill={accentColor}
           />
         </svg>
         <span style={{ fontSize: 24, fontWeight: 600 }}>Unable to load Telegram profile</span>
-        <span style={{ fontSize: 16, color: '#666666', textAlign: 'center' }}>{message}</span>
+        <span style={{ fontSize: 16, color: subtleColor, textAlign: 'center' }}>{message}</span>
+        {/* Corner gradient accent */}
+        <div
+          style={{
+            position: 'absolute',
+            right: 0,
+            bottom: 0,
+            width: '120px',
+            height: '120px',
+            borderRadius: '100% 0 0 0',
+            background: isDark
+              ? 'radial-gradient(circle at 100% 100%, rgba(0,136,204,0.1), transparent 70%)'
+              : 'radial-gradient(circle at 100% 100%, rgba(0,136,204,0.05), transparent 70%)',
+            zIndex: 0,
+          }}
+        />
       </div>
     </div>
   );
