@@ -51,7 +51,7 @@ async function scrapeAndCache(username: string): Promise<ScrapeResult> {
     const title = extractTitle(doc);
     const description = extractDescription(doc);
 
-    if (!image || !title) {
+    if (!title) {
       throw new TelegramScrapeError('Could not parse essential data from the Telegram page.');
     }
 

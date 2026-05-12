@@ -52,7 +52,11 @@ export function extractDescription(doc: Document): string | null {
 }
 
 export function extractImage(doc: Document): string | null {
-  return doc.querySelector('img.tgme_page_photo_image')?.getAttribute('src') || null;
+  const img = doc.querySelector('img.tgme_page_photo_image');
+  if (!img) return null;
+  const src = img.getAttribute('src');
+  if (!src || src.trim() === '' || src.includes('blank.gif') || src.includes('data:image/gif')) return null;
+  return src;
 }
 
 export function extractVerifiedStatus(doc: Document): boolean {

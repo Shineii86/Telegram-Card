@@ -19,7 +19,7 @@ export interface ScrapeResult {
   title: string;
   username: string;
   description: string | null;
-  image: string;
+  image: string | null;
   extra: string | null;
   isVerified: boolean;
 }

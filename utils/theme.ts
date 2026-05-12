@@ -56,3 +56,17 @@ export function resolveVerifiedOverride(
 export function sanitizeUsername(username: string): string {
   return username.replace(/[^a-zA-Z0-9_]/g, '');
 }
+
+/** Generate a default avatar SVG data-URI with the user's initial letter. */
+export function generateDefaultAvatar(username: string, isDark: boolean): string {
+  const initial = (username.charAt(0) || '?').toUpperCase();
+  const bgColor = isDark ? '#3a3a3a' : '#c4c9d4';
+  const textColor = isDark ? '#8DD5FF' : '#3390D6';
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="60" fill="${bgColor}"/>
+    <text x="60" y="60" dy="0.35em" text-anchor="middle" font-family="Arial,sans-serif" font-size="52" font-weight="700" fill="${textColor}">${initial}</text>
+  </svg>`;
+
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+}

@@ -11,7 +11,7 @@ import { NextRequest } from 'next/server';
 import { ImageResponse } from 'next/og';
 import scrapeTelegram from '@/utils/scrapeTelegram';
 import { TelegramScrapeError, UserNotFoundError } from '@/utils/errors';
-import { resolveTheme, resolveVerifiedOverride, sanitizeUsername } from '@/utils/theme';
+import { resolveTheme, resolveVerifiedOverride, sanitizeUsername, generateDefaultAvatar } from '@/utils/theme';
 import { TelegramCard, ErrorCard } from '@/components/TelegramCard';
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -58,9 +58,10 @@ export async function GET(request: NextRequest) {
     const result = await scrapeTelegram(sanitized);
     const theme = resolveTheme(searchParams, isDark);
     const isVerified = resolveVerifiedOverride(searchParams, result.isVerified);
+    const image = result.image || generateDefaultAvatar(sanitized, isDark);
 
     const response = new ImageResponse(
-      <TelegramCard result={{ ...result, isVerified }} theme={theme} isDark={isDark} />,
+      <TelegramCard result={{ ...result, image, isVerified }} theme={theme} isDark={isDark} />,
       { width: 700, height: 250, emoji: 'fluent', headers: imageHeaders() },
     );
 
